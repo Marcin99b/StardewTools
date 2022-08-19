@@ -49,6 +49,12 @@
     <br />
     <br />
     <div class="card border mb-3">
+      <div class="card-header">Wszystkie dni (łącznie z fermentacją)</div>
+      <div class="card-body text-primary">
+        <h2 class="card-title text-center" id="allDays"></h2>
+      </div>
+    </div>
+    <div class="card border mb-3">
       <div class="card-header">Ilość dni do ostatniego zbioru</div>
       <div class="card-body text-primary">
         <h2 class="card-title text-center" id="daysToLatestHarvest"></h2>
@@ -151,6 +157,7 @@
 
     const tryRecalculate = () => {
       var result = getResults();
+      document.getElementById("allDays").innerText = result.allDays;
       document.getElementById("daysToLatestHarvest").innerText = result.daysToLatestHarvest;
       document.getElementById("incomePerPlant").innerText = result.incomePerPlant;
       document.getElementById("profitPerPlant").innerText = result.profitPerPlant;
