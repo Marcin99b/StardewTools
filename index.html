@@ -181,10 +181,10 @@
         row.appendChild(document.createElement("td")).innerText = item.name;
         row.appendChild(document.createElement("td")).innerText = item.allDays;
         row.appendChild(document.createElement("td")).innerText = item.daysToLatestHarvest;
-        row.appendChild(document.createElement("td")).innerText = item.incomePerPlant;
-        row.appendChild(document.createElement("td")).innerText = item.profitPerPlant;
-        row.appendChild(document.createElement("td")).innerText = item.incomePerDay;
-        row.appendChild(document.createElement("td")).innerText = item.profitPerDay;
+        row.appendChild(document.createElement("td")).innerText = parseFloat(item.incomePerPlant).toFixed(2);
+        row.appendChild(document.createElement("td")).innerText = parseFloat(item.profitPerPlant).toFixed(2);
+        row.appendChild(document.createElement("td")).innerText = parseFloat(item.incomePerDay).toFixed(2);
+        row.appendChild(document.createElement("td")).innerText = parseFloat(item.profitPerDay).toFixed(2);
 
         let deleteTd = document.createElement("td");
         let deleteButton = document.createElement("button");
