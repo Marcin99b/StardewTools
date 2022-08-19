@@ -41,6 +41,11 @@
       <label>Ilość dni fermentacji (wpisz 0 jeśli nie ma)</label>
       <input type="number" class="form-control" onkeyup="tryRecalculate()" id="fermentationDays" />
     </div>
+
+    <div class="form-group">
+      <label>Wycena dnia pracy, chodzi o podlewanie itp (wpisz 0 jeśli nie ma)</label>
+      <input type="number" class="form-control" onkeyup="tryRecalculate()" id="workValue" />
+    </div>
     <br />
     <br />
     <div class="card border mb-3">
@@ -105,14 +110,21 @@
       seedsPrice,
       daysToFirstHarvest,
       daysToNextHarvests,
-      fermentationDays
+      fermentationDays,
+      workValue
     ) => {
-      const incomePerPlant = pricePerHarvest * harvestsQuantity;
+      let daysToLatestHarvest = daysToFirstHarvest + (harvestsQuantity - 1) * daysToNextHarvests;
+      const allDays = daysToLatestHarvest + fermentationDays;
+
+      const workPrice = workValue * daysToLatestHarvest;
+
+      const incomePerPlant = (pricePerHarvest - workPrice) * harvestsQuantity;
       const profitPerPlant = incomePerPlant - seedsPrice;
-      const daysToLatestHarvest = daysToFirstHarvest + (harvestsQuantity - 1) * daysToNextHarvests + fermentationDays;
-      const incomePerDay = incomePerPlant / daysToLatestHarvest;
-      const profitPerDay = profitPerPlant / daysToLatestHarvest;
-      return { daysToLatestHarvest, incomePerPlant, profitPerPlant, incomePerDay, profitPerDay };
+
+      const incomePerDay = incomePerPlant / allDays;
+      const profitPerDay = profitPerPlant / allDays;
+
+      return { allDays, incomePerPlant, profitPerPlant, incomePerDay, profitPerDay };
     };
 
     const getResults = () => {
@@ -122,6 +134,7 @@
       const daysToFirstHarvest = parseInt(document.getElementById("daysToFirstHarvest").value);
       const daysToNextHarvests = parseInt(document.getElementById("daysToNextHarvests").value);
       const fermentationDays = parseInt(document.getElementById("fermentationDays").value);
+      var workValue = parseInt(document.getElementById("workValue").value);
 
       const result = calculateProfitPerPlant(
         pricePerHarvest,
@@ -129,7 +142,8 @@
         seedsPrice,
         daysToFirstHarvest,
         daysToNextHarvests,
-        fermentationDays
+        fermentationDays,
+        workValue
       );
       return result;
     };
