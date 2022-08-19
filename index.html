@@ -159,10 +159,10 @@
       var result = getResults();
       document.getElementById("allDays").innerText = result.allDays;
       document.getElementById("daysToLatestHarvest").innerText = result.daysToLatestHarvest;
-      document.getElementById("incomePerPlant").innerText = result.incomePerPlant;
-      document.getElementById("profitPerPlant").innerText = result.profitPerPlant;
-      document.getElementById("incomePerDay").innerText = result.incomePerDay;
-      document.getElementById("profitPerDay").innerText = result.profitPerDay;
+      document.getElementById("incomePerPlant").innerText = result.incomePerPlant.toFixed(2);
+      document.getElementById("profitPerPlant").innerText = result.profitPerPlant.toFixed(2);
+      document.getElementById("incomePerDay").innerText = result.incomePerDay.toFixed(2);
+      document.getElementById("profitPerDay").innerText = result.profitPerDay.toFixed(2);
     };
 
     var tableItems = [];
