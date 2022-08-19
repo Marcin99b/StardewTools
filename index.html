@@ -119,8 +119,8 @@
 
       const workPrice = workValue * daysToLatestHarvest;
 
-      const incomePerPlant = (pricePerHarvest - workPrice) * harvestsQuantity;
-      const profitPerPlant = incomePerPlant - seedsPrice;
+      const incomePerPlant = pricePerHarvest * harvestsQuantity;
+      const profitPerPlant = incomePerPlant - seedsPrice - workPrice;
 
       const incomePerDay = incomePerPlant / allDays;
       const profitPerDay = profitPerPlant / allDays;
