@@ -14,7 +14,7 @@
     <br />
     <br />
     <div class="form-group">
-      <label>Cena za zbiór</label>
+      <label>Cena sprzedaży za zbiór</label>
       <input type="number" class="form-control" onkeyup="tryRecalculate()" id="pricePerHarvest" />
     </div>
     <div class="form-group">
@@ -35,6 +35,11 @@
     <div class="form-group">
       <label>Co ile dni jest każdy kolejny zbiór (wpisz 0 jeśli nie ma)</label>
       <input type="number" class="form-control" onkeyup="tryRecalculate()" id="daysToNextHarvests" />
+    </div>
+
+    <div class="form-group">
+      <label>Ilość dni fermentacji (wpisz 0 jeśli nie ma)</label>
+      <input type="number" class="form-control" onkeyup="tryRecalculate()" id="fermentationDays" />
     </div>
     <br />
     <br />
@@ -86,6 +91,7 @@
           <th scope="col">Dochód za wszystkie zbiory łącznie</th>
           <th scope="col">Przychód dzienny</th>
           <th scope="col">Dochód dzienny</th>
+          <th scope="col">Dochód dzienny</th>
           <th scope="col"></th>
         </tr>
       </thead>
@@ -98,11 +104,12 @@
       harvestsQuantity,
       seedsPrice,
       daysToFirstHarvest,
-      daysToNextHarvests
+      daysToNextHarvests,
+      fermentationDays
     ) => {
       const incomePerPlant = pricePerHarvest * harvestsQuantity;
       const profitPerPlant = incomePerPlant - seedsPrice;
-      const daysToLatestHarvest = 13 + (harvestsQuantity - 1) * daysToNextHarvests;
+      const daysToLatestHarvest = daysToFirstHarvest + (harvestsQuantity - 1) * daysToNextHarvests + fermentationDays;
       const incomePerDay = incomePerPlant / daysToLatestHarvest;
       const profitPerDay = profitPerPlant / daysToLatestHarvest;
       return { daysToLatestHarvest, incomePerPlant, profitPerPlant, incomePerDay, profitPerDay };
@@ -114,13 +121,15 @@
       const seedsPrice = parseInt(document.getElementById("seedsPrice").value);
       const daysToFirstHarvest = parseInt(document.getElementById("daysToFirstHarvest").value);
       const daysToNextHarvests = parseInt(document.getElementById("daysToNextHarvests").value);
+      const fermentationDays = parseInt(document.getElementById("fermentationDays").value);
 
       const result = calculateProfitPerPlant(
         pricePerHarvest,
         harvestsQuantity,
         seedsPrice,
         daysToFirstHarvest,
-        daysToNextHarvests
+        daysToNextHarvests,
+        fermentationDays
       );
       return result;
     };
