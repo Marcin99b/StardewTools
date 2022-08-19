@@ -134,7 +134,7 @@
       const daysToFirstHarvest = parseInt(document.getElementById("daysToFirstHarvest").value);
       const daysToNextHarvests = parseInt(document.getElementById("daysToNextHarvests").value);
       const fermentationDays = parseInt(document.getElementById("fermentationDays").value);
-      var workValue = parseInt(document.getElementById("workValue").value);
+      var workValue = parseFloat(document.getElementById("workValue").value);
 
       const result = calculateProfitPerPlant(
         pricePerHarvest,
