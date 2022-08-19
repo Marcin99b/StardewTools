@@ -91,6 +91,7 @@
       <thead>
         <tr>
           <th scope="col">Nazwa</th>
+          <th scope="col">Wszystkie dni</th>
           <th scope="col">Ilość dni do ostatniego zbioru</th>
           <th scope="col">Przychód za wszystkie zbiory łącznie</th>
           <th scope="col">Dochód za wszystkie zbiory łącznie</th>
@@ -124,7 +125,7 @@
       const incomePerDay = incomePerPlant / allDays;
       const profitPerDay = profitPerPlant / allDays;
 
-      return { allDays, incomePerPlant, profitPerPlant, incomePerDay, profitPerDay };
+      return { allDays, daysToLatestHarvest, incomePerPlant, profitPerPlant, incomePerDay, profitPerDay };
     };
 
     const getResults = () => {
@@ -178,6 +179,7 @@
       for (let item of tableItems) {
         let row = document.createElement("tr");
         row.appendChild(document.createElement("td")).innerText = item.name;
+        row.appendChild(document.createElement("td")).innerText = item.allDays;
         row.appendChild(document.createElement("td")).innerText = item.daysToLatestHarvest;
         row.appendChild(document.createElement("td")).innerText = item.incomePerPlant;
         row.appendChild(document.createElement("td")).innerText = item.profitPerPlant;
